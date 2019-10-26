@@ -9,6 +9,35 @@ def merge(items1, items2):
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
+    # items_result = []
+
+    # for item_one in range(len(items1) - 1):
+    #     for item_two in range(len(items2) - 1):
+    #         if items1[item_one] < items2[item_two]:
+    #             items_result.append(items1[item_one])
+    #         elif items1[item_one] > items2[item_two]:
+    #             items_result.append(items2[item_two])
+    # return items_result
+
+    # items_result = []
+    # pointer_one = 0
+    # pointer_two = 0
+    # for _ in range(len(items1)):
+    #     for _ in range(len(items2)):
+    #         if items1[pointer_one] < items2[pointer_two]:
+    #             items_result.append(items2[pointer_two])
+    #             if pointer_one == len(items1):
+    #                 items_result.append(items1[pointer_one])
+    #             pointer_one += 1
+    #         elif items1[pointer_one] > items2[pointer_two]:
+    #             items_result.append(items1[pointer_one])
+    #             if pointer_two == len(items2):
+    #                 items_result.append(items2[pointer_two])
+    #             pointer_two += 1
+            # print("item_one:", item_one)
+            # print("item_two:", item_two)
+
+print(merge([0,1,5,7,20], [2,3,4,10]))
 
 
 def split_sort_merge(items):

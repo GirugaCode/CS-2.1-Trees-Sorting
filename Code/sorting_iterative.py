@@ -5,26 +5,18 @@ def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # [3,6,1,2,12,4] 
-    curr_item = 0
-    for _ in range(1, len(items)):
-        if items[curr_item] > items[curr_item + 1]:
+
+    # Traverse through the items with the amount on indexes
+    for item in range(len(items) - 1):
+        if items[item] > items[item + 1]: # Check if next item is greater than previous
             return False
-        curr_item += 1
     return True
-
-    # First Approach 
-        # for _ in items:
-        #     if items[tracker] > items[tracker + 1]:
-        #         return False
-        #     tracker += 1
-        # return True
-
 
 def bubble_sort(items):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
+    Best running time: O(n) where n is sorting a list that is sorted
+    Worst running time: O(n^2) where n is sorting out a very unsorted list 
     TODO: Memory usage: ??? Why and under what conditions?"""
     num_items = len(items) - 1
     is_sorted = False
@@ -35,32 +27,37 @@ def bubble_sort(items):
             if items[item] > items[item + 1]:
                 is_sorted = False
                 items[item], items[item + 1] = items[item + 1], items[item]
-
-
-    # curr_item = 0
-    # for _ in range(1, len(items)):
-    #     if items[curr_item] < items[curr_item + 1]:
-    #         items[curr_item], items[curr_item + 1] = items[curr_item + 1], items[curr_item]
-    #     curr_item += 1
-    # return items
-
+        if is_sorted:
+            break
 
 
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
+    Best running time: O(n^2) where n is going through the list twice to find sub_item
+    Worst running time: O(n^2) where n is going through the list twice to find sub_item
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Find minimum item in unsorted items
-    # TODO: Swap it with first unsorted item
-
+    for item in range(len(items)):
+        minimum = item
+        for sub_item in range(item, len(items)):
+            if items[sub_item] < items[minimum]:
+                minimum = sub_item
+        items[minimum], items[item] = items[item], items[minimum] 
 
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
+    Best running time: O(n) where n only sorts one item
+    Worst running time: O(n^2) where n is going through the list twice to find sub_items
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
+
+    for item in range(len(items)): # Traverse through length of array, starting with the element at index 0.
+        current_unsorted_item = items[item] # Assumes the first item is sorted
+        sub_item = item - 1 # Assignment of the next item in array
+        
+        # Continue through the array for items[0 -> item - 1] 
+        while sub_item >= 0 and current_unsorted_item < items[sub_item]:
+            items[sub_item + 1] = items[sub_item] 
+            sub_item -= 1 
+        items[sub_item + 1] = current_unsorted_item # Set the sub_item in the sorted section
+
