@@ -1,5 +1,5 @@
 #!python
-
+from sorting_iterative import bubble_sort, selection_sort, insertion_sort
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -9,35 +9,30 @@ def merge(items1, items2):
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
-    # items_result = []
+    item_result = []
+    while items1 or items2:
+        if not items2 or items1 and items1[0] < items2[0]:
+            item_result.append(items1.pop(0))
+        else:
+            item_result.append(items2.pop(0))
+    return item_result
 
-    # for item_one in range(len(items1) - 1):
-    #     for item_two in range(len(items2) - 1):
-    #         if items1[item_one] < items2[item_two]:
-    #             items_result.append(items1[item_one])
-    #         elif items1[item_one] > items2[item_two]:
-    #             items_result.append(items2[item_two])
-    # return items_result
+    # Method Two
+    # num_items1 = len(items1)
+    # num_items2 = len(items2)
 
-    # items_result = []
-    # pointer_one = 0
-    # pointer_two = 0
-    # for _ in range(len(items1)):
-    #     for _ in range(len(items2)):
-    #         if items1[pointer_one] < items2[pointer_two]:
-    #             items_result.append(items2[pointer_two])
-    #             if pointer_one == len(items1):
-    #                 items_result.append(items1[pointer_one])
-    #             pointer_one += 1
-    #         elif items1[pointer_one] > items2[pointer_two]:
-    #             items_result.append(items1[pointer_one])
-    #             if pointer_two == len(items2):
-    #                 items_result.append(items2[pointer_two])
-    #             pointer_two += 1
-            # print("item_one:", item_one)
-            # print("item_two:", item_two)
+    # item_result = []
+    # items1_pointer = 0
+    # items2_pointer = 0
 
-print(merge([0,1,5,7,20], [2,3,4,10]))
+    # while items1_pointer < num_items1 and items2_pointer < num_items2:
+    #     if items1[items1_pointer] < items2[items2_pointer]:
+    #         item_result.append(items1[items1_pointer])
+    #         items1_pointer += 1
+    #     else:
+    #         item_result.append(items2[items2_pointer])
+    #         items2_pointer += 1
+    # return item_result
 
 
 def split_sort_merge(items):
@@ -50,6 +45,17 @@ def split_sort_merge(items):
     # TODO: Sort each half using any other sorting algorithm
     # TODO: Merge sorted halves into one list in sorted order
 
+    middle = len(items) // 2
+    left = bubble_sort(items[:middle])
+    right = insertion_sort(items[middle:])
+
+    sorted_items = merge(left, right)
+
+    items[:] = sorted_items
+    return items
+    
+
+
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -60,6 +66,22 @@ def merge_sort(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
+    if len(items) < 2:
+        return items
+    
+    middle = len(items) // 2
+    left = merge_sort(items[:middle])
+    right = merge_sort(items[middle:])
+
+    sorted_items = merge(left, right)
+
+    # Mutates the sorted items in the list
+    items[:] = sorted_items
+
+    # items = sorted_items
+    # for index in range(len(items)):
+    #     items[index] = sorted_items[index]
+    return items
 
 
 def partition(items, low, high):

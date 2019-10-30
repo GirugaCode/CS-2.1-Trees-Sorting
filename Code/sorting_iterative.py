@@ -30,6 +30,8 @@ def bubble_sort(items):
         if is_sorted:
             break
 
+    return items
+
 
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
@@ -43,6 +45,7 @@ def selection_sort(items):
             if items[sub_item] < items[minimum]:
                 minimum = sub_item
         items[minimum], items[item] = items[item], items[minimum] 
+    return items
 
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
@@ -60,4 +63,5 @@ def insertion_sort(items):
             items[sub_item + 1] = items[sub_item] 
             sub_item -= 1 
         items[sub_item + 1] = current_unsorted_item # Set the sub_item in the sorted section
+    return items
 
