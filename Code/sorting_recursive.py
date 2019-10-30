@@ -4,11 +4,8 @@ from sorting_iterative import bubble_sort, selection_sort, insertion_sort
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
+    Runtime: O(n) where n is the number of items we put into the item_result
+    Memory Usage: O(n) where n is the space that is appended into the item_result"""
     item_result = []
     while items1 or items2:
         if not items2 or items1 and items1[0] < items2[0]:
@@ -39,19 +36,18 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
-
+    Running Time: O(n^2) because of using bubble_sort and insertion_sort
+    Memory Usage: O(n) where n is the amount of items you are merging together"""
     middle = len(items) // 2
-    left = bubble_sort(items[:middle])
-    right = insertion_sort(items[middle:])
+    left = bubble_sort(items[:middle]) # Sorting the items on the left 
+    right = insertion_sort(items[middle:]) # Sorting the items on the right
 
     sorted_items = merge(left, right)
 
-    items[:] = sorted_items
+    # Sets the sorted items in the list
+    for index in range(len(items)):
+        items[index] = sorted_items[index]
+
     return items
     
 
@@ -60,27 +56,23 @@ def split_sort_merge(items):
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
-    # TODO: Merge sorted halves into one list in sorted order
+    Running Time: O(n*logn) Using the merge function is O(n) and recursivly spliting the array in merge_sort is O(logn)
+    Memory Usage: O(n) where n is the amount of items you are merging together"""
+
+    # Base Case
     if len(items) < 2:
         return items
     
     middle = len(items) // 2
-    left = merge_sort(items[:middle])
-    right = merge_sort(items[middle:])
+    left = merge_sort(items[:middle]) # Marks every item on the left of the array
+    right = merge_sort(items[middle:]) # Marks every item on the right of the array
 
-    sorted_items = merge(left, right)
+    # Merges the seperate items together
+    sorted_items = merge(left, right) 
 
     # Mutates the sorted items in the list
     items[:] = sorted_items
 
-    # items = sorted_items
-    # for index in range(len(items)):
-    #     items[index] = sorted_items[index]
     return items
 
 
