@@ -215,7 +215,7 @@ def get_sort_function():
 
 
 # If using PyTest, change this variable to the sort function you want to test
-sort = split_sort_merge
+sort = quick_sort
 
 if __name__ == '__main__':
     # Get sort function from command-line argument
