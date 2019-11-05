@@ -78,26 +78,25 @@ def merge_sort(items):
 
 def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
-    `[low...high]` by choosing a pivot (TODO: document your method here) from
+    `[low...high]` by choosing a pivot (Choosing the first element as the pivot) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Choose a pivot any way and document your method in docstring above
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
-    pivot_index = items[low]
-    swapped_index = low + 1
+    Best case running time: O(n*logn) where the pivot index creates a balanced tree. Each level of the tree is partitioned
+    Worst case running time: O(n^2) where the pivot index is bad and the recursion depth of the tree is deep
+    Best Case Memory usage: O(1) Where memory is in-place but technically O(logn) to store pointers"""
 
-    for item in range(swapped_index, high): 
-        if items[item] < pivot_index:
-            items[item], items[swapped_index] = items[swapped_index], items[item]
-            swapped_index += 1
+    pivot_index = items[low] # Choosing the low value as my pivot
+    swapped_index = low + 1 # Keep track of how many times i've swapped
 
+    for item in range(low, high): # Iterate through low to high of items 
+        if items[item] < pivot_index: # Compare the element to our pivot
+            items[item], items[swapped_index] = items[swapped_index], items[item] # Swap
+            swapped_index += 1 # Continue the iteration
+
+    # Move the pivot items into the final positions
     items[low], items[swapped_index - 1] = items[swapped_index - 1], items[low]
 
+    # Return the partitioned index
     return swapped_index - 1
 
 
@@ -107,29 +106,20 @@ def quick_sort(items, low=None, high=None):
     around a pivot item and recursively sorting each remaining sublist range.
     Best case running time: O(n*logn) where the pivot index creates a balanced tree. Each level of the tree is partitioned
     Worst case running time: O(n^2) where the pivot index is bad and the recursion depth of the tree is deep
-    Best Case Memory usage: O(logn) 
-    Worst Case Memory usage: O(n)"""
-    # TODO: Check if high and low range bounds have default values (not given)
-    # TODO: Check if list or range is so small it's already sorted (base case)
-    # TODO: Partition items in-place around a pivot and get index of pivot
-    # TODO: Sort each sublist range by recursively calling quick sort
+    Best Case Memory usage: O(1) Where memory is in-place but technically O(logn) to store pointers """
+
+    # To avoid None Types, assign low and high to its appropriate index
     if high is None and low is None:
         high = len(items)
         low = 0
-
+        
+    # Base case, if the list is 1 or none then it is already sorted
     if (high - low) < 2:
         return
 
+    # Partition the items in place
     pivot_index = partition(items, low, high)
-    quick_sort(items, pivot_index + 1, high)
+
+    # Recursivly call quick_sort with a new pivot_index each time
     quick_sort(items, low, pivot_index)
-
-items1 = [3,5,7,8]
-items2 = [21, 4, 7, -3, 5, -1, 6, 8, 20]
-print(items2)
-print(partition(items2, 0, len(items2)))
-print(items2)
-# print(quick_sort(items2))
-
-
-
+    quick_sort(items, pivot_index + 1, high)
