@@ -56,6 +56,13 @@ class PrefixTreeNode:
         else:
             raise ValueError(f'Child exists for character {character!r}')
 
+        # if not self.has_child(character):
+            # Add given character and child node to this node's children
+        #     child_node = PrefixTreeNode(character)
+        #     self.children[character] = child_node
+        # else:
+        #     raise ValueError(f'Child exists for character {character!r}')
+
     def __repr__(self):
         """Return a code representation of this prefix tree node."""
         return f'PrefixTreeNode({self.character!r})'
