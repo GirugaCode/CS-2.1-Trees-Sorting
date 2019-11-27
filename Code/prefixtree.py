@@ -35,10 +35,6 @@ class PrefixTree:
 
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
-        # if self.size == 0:
-        #     return True
-        # else:
-        #     return False
         return self.size == 0
 
     def contains(self, string):
@@ -102,7 +98,7 @@ class PrefixTree:
         # Create a list of completions in prefix tree
         completions = []
 
-        # init node & depth
+        # Init node & depth
         node, _ = self._find_node(prefix)
 
         # Edge Case: prefix does not exist
@@ -113,7 +109,7 @@ class PrefixTree:
         if node.is_terminal():
             completions.append(prefix)
 
-        # traverse through prefix tree & append all terminal words
+        # Traverse through prefix tree & append all terminal words
         for child in node.children.values():
             self._traverse(child, prefix +
                            child.character, completions.append)
