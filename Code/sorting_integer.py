@@ -4,12 +4,28 @@
 def counting_sort(numbers):
     """Sort given numbers (integers) by counting occurrences of each number,
     then looping over counts and copying that many numbers into output list.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Find range of given numbers (minimum and maximum integer values)
-    # TODO: Create list of counts with a slot for each number in input range
-    # TODO: Loop over given numbers and increment each number's count
-    # TODO: Loop over counts and append that many numbers into output list
+    Running time: O(n) where n is the amount of number
+    Memory usage: O(n) where n is the amount of number"""
+    minimum = min(numbers)
+    maximum = max(numbers)
+
+    # Create list of counts with a slot for each number in input range
+    number_list = [range(minimum, maximum + 1)]
+
+    # Loop over given numbers and increment each number's count
+    for num in numbers:
+        number_list[num - minimum] += 1 
+
+    # Iterate over counts and append to results
+    result = []
+    for i, count in enumerate(number_list):
+        if count == 0:
+            continue
+
+        num = i + minimum
+        result.extend([num] * count)
+    
+    return result
     # FIXME: Improve this to mutate input instead of creating new output list
 
 

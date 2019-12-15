@@ -69,7 +69,7 @@ def main():
         return
 
     # Test sort function
-    test_sorting(sort_function, num_items, max_value)
+    counting_sort(num_items)
 
 
 if __name__ == '__main__':
