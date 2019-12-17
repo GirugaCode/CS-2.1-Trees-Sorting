@@ -10,7 +10,7 @@ def counting_sort(numbers):
     maximum = max(numbers)
 
     # Create list of counts with a slot for each number in input range
-    number_list = [range(minimum, maximum + 1)]
+    number_list = [0 for _ in range(minimum, maximum + 1)]
 
     # Loop over given numbers and increment each number's count
     for num in numbers:
