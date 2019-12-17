@@ -25,6 +25,7 @@ def counting_sort(numbers):
         num = i + minimum
         result.extend([num] * count)
     
+    numbers[:] = result
     return result
     # FIXME: Improve this to mutate input instead of creating new output list
 
