@@ -9,6 +9,10 @@ def counting_sort(numbers):
     minimum = min(numbers)
     maximum = max(numbers)
 
+    # Find range of given numbers (minimum and maximum integer values)
+    if len(numbers) < 1:
+        return numbers
+
     # Create list of counts with a slot for each number in input range
     number_list = [0 for _ in range(minimum, maximum + 1)]
 
